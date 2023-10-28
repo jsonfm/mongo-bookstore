@@ -48,3 +48,9 @@ def delete_book(book_id: str):
 def delete_book_permanently(book_id: str):
     result = booksService.delete_permanently(book_id)
     return result
+
+
+@router.post("/{book_id}/restore")
+def restore_deleted_book(book_id: str):
+    result = booksService.restore(book_id)
+    return result
