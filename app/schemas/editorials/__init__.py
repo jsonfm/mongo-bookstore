@@ -1,6 +1,6 @@
-from pydantic import BaseModel
+from app.schemas.base import CustomBaseModel
 
 
-class Editorial(BaseModel):
+class Editorial(CustomBaseModel):
     name: str
     bio: str

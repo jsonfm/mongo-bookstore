@@ -1,6 +1,6 @@
-from pydantic import BaseModel
+from app.schemas.base import CustomBaseModel
 
 
-class Author(BaseModel):
+class Author(CustomBaseModel):
     name: str
     bio: str
