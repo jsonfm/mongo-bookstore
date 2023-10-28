@@ -41,7 +41,8 @@ def update_book(book_id: str, form: UpdateBookForm):
 
 @router.delete("/{book_id}")
 def delete_book(book_id: str):
-    return {}
+    result = booksService.delete(book_id)
+    return result
 
 
 @router.delete("/{book_id}/permanently")

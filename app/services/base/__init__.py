@@ -64,13 +64,14 @@ class BaseService:
     def delete(self, item_id: str):
         """Sets `deleted` attribute of an object to `true`."""
         data = {"deleted": True}
-        item = self.update(item_id, data)
-        return item
+        self.update(item_id, data)
+        result = {"item_id": item_id}
+        return result
 
     @to_dict
     def restore(self, item_id: str):
         """Restores a `deleted` item."""
-        data = {"delete": False}
+        data = {"deleted": False}
         item = self.update(item_id, data)
         return item
 
