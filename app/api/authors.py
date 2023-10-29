@@ -6,12 +6,15 @@ from app.schemas.authors.forms import CreateAuthorForm, UpdateAuthorForm
 # services
 from app.services.authors import authorsService
 
+
 router = APIRouter(prefix="/authors", tags=["Authors"])
 
+
 @router.get("/")
-def get_authors(limit: int, offset: int):
+def get_authors(limit: int = 30, offset: int = 0):
     authors = authorsService.get_items(limit=limit, offset=offset)
     return authors
+
 
 @router.get("/{author_id}")
 def get_author(author_id: str):

@@ -1,6 +1,7 @@
 from typing import Dict, List, Union
 
 from bson import ObjectId
+from bson.dbref import DBRef
 from pymongo.cursor import Cursor
 
 
@@ -25,3 +26,14 @@ def to_dict(func):
         return result
 
     return wrapper
+
+
+def parse_ids(data: dict, keys: list):
+    """Parses keys as ObjectIds."""
+    for key in keys:
+        if key in data:
+            data[key] = ObjectId(str(data[key]))
+
+
+def add_ref(data: dict, key: str, collection_name: str, object_id):
+    data[key] = DBRef(collection_name, ObjectId(str(object_id)))
