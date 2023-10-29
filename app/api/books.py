@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 # models
-from app.schemas.books import Book
+from app.schemas.books import Book, GenresType
 
 # forms
 from app.schemas.books.forms import CreateBookForm, UpdateBookForm
@@ -11,14 +11,20 @@ from app.schemas.books.responses import GetBooksResponse
 
 # services
 from app.services.books import booksService
+from app.services.books.genres import genres
 
 router = APIRouter(prefix="/books", tags=["Books"])
 
 
-@router.get("/")
+@router.get("/", response_model=list[Book])
 def get_books(limit: int = 30, offset: int = 0):
     books = booksService.get_items(limit, offset)
     return books
+
+
+@router.get("/genres", response_model=GenresType)
+def get_genres():
+    return genres
 
 
 @router.get("/{book_id}")
@@ -29,7 +35,7 @@ def get_book(book_id: str):
 
 @router.post("/")
 def create_book(form: CreateBookForm):
-    book = booksService.create(form.dict())
+    book = booksService.create(form.dict(), parse_id_keys=["editorial"])
     return book
 
 

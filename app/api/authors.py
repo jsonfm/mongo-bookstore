@@ -1,16 +1,18 @@
 from fastapi import APIRouter
 
+# schema
+from app.schemas.authors import Author
+
 # forms
 from app.schemas.authors.forms import CreateAuthorForm, UpdateAuthorForm
 
 # services
 from app.services.authors import authorsService
 
-
 router = APIRouter(prefix="/authors", tags=["Authors"])
 
 
-@router.get("/")
+@router.get("/", response_model=list[Author])
 def get_authors(limit: int = 30, offset: int = 0):
     authors = authorsService.get_items(limit=limit, offset=offset)
     return authors
@@ -37,6 +39,7 @@ def update_author(author_id: str, form: UpdateAuthorForm):
 @router.delete("/{author_id}")
 def delete_author(author_id: str):
     return {}
+
 
 @router.delete("/{author_id}/permanently")
 def delete_author_permanently(author_id: str):

@@ -2,7 +2,7 @@ from bson import ObjectId
 from pymongo.collection import Collection
 
 from app.db import db
-from app.utils.bson import to_dict
+from app.utils.bson import parse_ids, to_dict
 from app.utils.timestamps import add_create_timestamp, add_update_timestamp
 
 
@@ -20,7 +20,7 @@ class BaseService:
         exclude_deleted: bool = True,
         exclude_hidden: bool = True,
     ):
-        """Returns a list of items available from the database."""
+        """Returns a list of available items from the database."""
         filter_ = {}
 
         if exclude_deleted:
@@ -39,12 +39,15 @@ class BaseService:
         return item
 
     @to_dict
-    def create(self, data: dict):
+    def create(self, data: dict, parse_id_keys: list = None):
         """Creates a new object on the database."""
         add_create_timestamp(data)
+        if isinstance(parse_id_keys, list):
+            parse_ids(data, parse_id_keys)
         data["deleted"] = False
         data["hidden"] = False
         result = self.collection.insert_one(data)
+
         if not result.acknowledged:
             raise Exception("Object couldn't be created")
         item = self.get_item(result.inserted_id)

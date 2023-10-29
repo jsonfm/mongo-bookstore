@@ -5,7 +5,7 @@ from pydantic_mongo import ObjectIdField
 
 
 class CustomBaseModel(BaseModel):
-    _id: str
+    id: str = Field(..., alias="_id")
     created_at: str
     updated_at: str
     deleted: bool
