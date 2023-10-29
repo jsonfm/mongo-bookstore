@@ -1,6 +1,12 @@
 ### 📚 Bookstore
 A simple app made with mongodb and python. It implements simple crud operations across the different data models related to books, authors, reviews, etc.
 
+### ✨ Technologies
+
+- FastAPI
+- Mongo
+
+
 ### ⚙️ Setup
 1. Create and activate a virtual environment:
 
@@ -18,11 +24,6 @@ MONGO_URI=""
 MONGO_INITDB_ROOT_USERNAME=""
 MONGO_INITDB_ROOT_PASSWORD=""
 ``` 
-
-### ✨ Technologies
-
-- FastAPI
-- Mongo
 
 ### ⚡️ Development
 
