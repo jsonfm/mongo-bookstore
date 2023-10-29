@@ -56,8 +56,8 @@ class Book(CustomBaseModel):
     pages_number: int
     authors: list
     editorial: str
-    genres: Optional[GenresType]
-    isbn: Optional[str]
-    dimensions: Optional[BookDimensions]
-    weight: Optional[BookWeight]
-    images: Optional[List[BookImage]]
+    genres: Optional[GenresType] = []
+    isbn: Optional[str] = None
+    dimensions: Optional[BookDimensions] = None
+    weight: Optional[BookWeight] = None
+    images: Optional[List[BookImage]] = []

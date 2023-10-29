@@ -13,4 +13,4 @@ class AuthorImage(BaseModel):
 class Author(CustomBaseModel):
     name: str
     bio: str
-    images: Optional[List[AuthorImage]]
+    images: Optional[List[AuthorImage]] = None
